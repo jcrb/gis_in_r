@@ -108,7 +108,9 @@ In this case, however, while our `SpatialPoints` object clearly knows what a CRS
 
 CRS objects can be created by passing the `CRS()` function the code associated with a known projection. You can find the codes for most commonly used projections from [www.spatialreference.org](www.spatialreference.org). 
 
-Note that the same CRS can often be called in many ways. For example, one of the most commonly used CRS is the WGS84 latitude-longitude projection. You can create a WGS84 lat-long projection object by either passing the reference code for the projection --  `CRS("+init=EPSG:4326"`) -- or by directly calling all its relevant parameters -- `CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")`.
+Note that the same CRS can often be called in many ways. For example, one of the most commonly used CRS is the WGS84 latitude-longitude projection. You can create a WGS84 lat-long projection object by either passing the reference code for the projection --  `CRS("+init=epsg:4326"`) -- or by directly calling all its relevant parameters -- `CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")`.
+
+__REMARQUE__: epsg doit s'écrire en minuscule sinon déclanche une erreur.
 
 Here's an illustration of assigning a CRS:
 
@@ -116,7 +118,7 @@ Here's an illustration of assigning a CRS:
 is.projected(my.first.points) # see if a projection is defined. 
   # Returns `NA` if no geographic coordinate system or projection; returns FALSE if has geographic coordinate system but no projection.
 
-crs.geo <- CRS("+init=EPSG:32633")  # UTM 33N
+crs.geo <- CRS("+init=epsg:32633")  # UTM 33N
 proj4string(my.first.points) <- crs.geo  # define projection system of our data
 is.projected(my.first.points)
 summary(my.first.points)
@@ -251,7 +253,7 @@ spplot(houses.DF)
 As with `SpatialPoints`, a `SpatialPolygons` doesn't actually know where it is in space until you give it a Coordinate Reference System, which you can do the same way you did with the `SpatialPoints` objects. 
 
 ```{r eval=FALSE}
-crs.geo <- CRS("+init=EPSG:4326")  # geographical, datum WGS84
+crs.geo <- CRS("+init=epsg:4326")  # geographical, datum WGS84
 proj4string(houses.DF) <- crs.geo  # define projection system of our data
 ```
 
@@ -382,7 +384,7 @@ df <- data.frame(c(7000,1000), row.names=c("SA","Lesotho"))
 mapDF <- SpatialPolygonsDataFrame(map, df)
 
 # Add WGS 84 coordinate system
-proj4string(mapDF) <- CRS('+init=EPSG:4326')
+proj4string(mapDF) <- CRS('+init=epsg:4326')
 
 # Plot
 spplot(mapDF)
